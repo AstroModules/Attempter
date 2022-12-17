@@ -1,17 +1,18 @@
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
+import time
+from time import sleep
 
-bot = Bot(token="")
+bot = Bot(token="5754170947:AAH9mfGndaWsm1iMGrytb2uBboYkPb2ce6s")
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
 
 @dp.chat_join_request_handler()
 async def start1(update: types.ChatJoinRequest):
-	await update.approve()
 	await bot.send_message(
 		chat_id=update.from_user.id, 
 		text=(
-			"<b>🥳 Ваша заявка на вступление в чат AstroModules Offtop успешно принята"
+			"<b>🥳 Ваша заявка на вступление в чат AstroModules Offtop Будет принята через 5 секунд, а пока"
 			+ '\n\n☘️ Другие чаты и каналы создателей:'
 			+ '\nAstroModules: @AstroModules'
 			+ '\nAstroModulesChat: @AstroModulesChat'
@@ -26,6 +27,8 @@ async def start1(update: types.ChatJoinRequest):
 		text=f"<b>Добро пожаловать в чат, <a href='tg://user?id={update.from_user.id}'>{update.from_user.first_name}</a>!</b>",
 		parse_mode="HTML"
 		)
+	sleep(5)
+	await update.approve()
 
 if __name__ == '__main__':
 	executor.start_polling(dp, skip_updates=True)
